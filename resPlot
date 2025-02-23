@@ -1,0 +1,14 @@
+set border lw 4
+set logscale y
+set title "Residuals" font "arial,22"
+set ylabel "Residual" font "arial,18"
+set xlabel "Iteration" font "arial,18"
+set key width 1
+plot "< cat log | grep 'Solving for Ux' | cut -d' ' -f9 | tr -d ','" title 'Ux' with lines lw 4,\
+"< cat log | grep 'Solving for Uy' | cut -d' ' -f9 | tr -d ','" title 'Uy' with lines lw 4,\
+"< cat log | grep 'Solving for Uz' | cut -d' ' -f9 | tr -d ','" title 'Uz' with lines lw 4,\
+"< cat log | grep 'Solving for k' | cut -d' ' -f9 | tr -d ','" title 'k' with lines lw 4,\
+"< cat log | grep 'Solving for p' | cut -d' ' -f9 | tr -d ','" title 'p' with lines lw 4,\
+"< cat log | grep 'Solving for epsilon' | cut -d' ' -f9 | tr -d ','" title 'epsilon' with lines lw 4
+pause 1
+reread
