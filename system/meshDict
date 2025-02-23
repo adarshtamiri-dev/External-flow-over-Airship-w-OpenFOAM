@@ -1,0 +1,95 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                |
+| \\      /  F ield         | cfMesh: A library for mesh generation          | 
+|  \\    /   O peration     |                                                |
+|   \\  /    A nd           | Author: Franjo Juretic                         | 
+|    \\/     M anipulation  | E-mail: franjo.juretic@c-fields.com            |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version   2.0;
+    format    ascii;
+    class     dictionary;
+    location  "system";
+    object    meshDict;
+}
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+surfaceFile "surfaceFiles/Z1.stl";
+
+maxCellSize 0.1;
+
+boundaryCellSize 0.1;
+
+minCellSize 0.1;
+
+surfaceMeshRefinement
+{
+ZH
+{
+    surfaceFile "surfaceFiles/aerostat0.stl";
+    cellSize 0.001;
+}
+/*
+fins
+{
+    surfaceFile "surfaceFiles/Zfins.stl";
+    cellSize 0.001;
+	//refinementThickness 0.01;
+
+}
+*/
+}
+
+objectRefinements
+{
+    wake1
+    {
+        cellSize 0.01; // [m]
+        type box;
+        centre (2.5 0 0);
+        lengthX 5;
+        lengthY 1.5;
+        lengthZ 1.5;
+    }
+/*
+    GondolaRef
+    {
+        cellSize 0.005; // [m]
+        type box;
+        centre (0.745 -0.3 0);
+        lengthX 0.25;
+        lengthY 0.1;
+        lengthZ 0.1;
+    }*/
+}
+/*
+boundaryLayers
+{
+    patchBoundaryLayers
+    {
+    zhiyF {
+    nLayers 3;
+    thicknessRatio 1;
+    maxFirstLayerThickness 1;
+    //allowDiscontinuity 1;
+    }
+    }
+
+    optimiseLayer 1;
+    untangleLayers 0;
+
+    optimisationParameters
+    {
+        nSmoothNormals 3;
+        maxNumIterations 10;
+        featureSizeFactor 0.4;
+        reCalculateNormals 1;
+        relThicknessTol 0.1;
+    }
+
+}
+*/
+// ************************************************************************* //

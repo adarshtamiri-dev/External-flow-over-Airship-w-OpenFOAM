@@ -1,0 +1,133 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2012                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     simpleFoam;
+
+startFrom       latestTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         100;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval  100;
+
+purgeWrite      0;
+
+writeFormat     binary;
+
+writePrecision  6;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+
+
+// adjustTimeStep  yes;
+
+// maxCo           1;
+
+functions
+{
+    forceCoeffs1
+{   
+     type            forceCoeffs;
+    libs            (forces);
+    writeControl    writeTime;
+    writeFields     true;
+
+    patches         (aerostat0);
+    p               p;
+    U               U;
+    rho             rhoInf;      // Indicates incompressible
+    log             true;
+    rhoInf          1.225;           // Required when rho = rhoInf
+////////////////////////////
+
+    #include "../0/U"
+    
+    pi  3.14159265;
+
+////////////////////////////////////////
+    i #eval{sin($theta * $pi/180)};
+    j #eval{cos($theta * $pi/180)};
+////////////////////////////////////////
+
+    liftDir         (#eval{-1*$i}     $j     0);// #eval {vector(-sin($theta * pi() / 180), cos($theta * pi() / 180), 0) };
+    dragDir         ($j               $i     0);// #eval {vector(cos($theta * pi() / 180), sin($theta * pi() / 180), 0) };
+
+    CofR            (0.88 0 0);  // Axle midpoint on ground
+    pitchAxis       (0 0 1);
+    magUInf         60.39;
+    lRef            1.8286;          // Wheelbase length
+    Aref            0.4416;          // Estimated
+    porosity        off;
+
+
+/*
+binData
+    {
+        nBin        20;          // output data into 20 bins
+        direction   (1 0 0);     // bin direction
+        cumulative  yes;
+    }*/
+    writeControl            writeTime;
+
+
+}
+
+valueAverage1
+{
+    // Mandatory entries (unmodifiable)
+    type              valueAverage;
+    libs              (fieldFunctionObjects);
+
+    // Mandatory entries (runtime modifiable)
+    functionObject    forceCoeffs1;                       // forceCoeffs1;
+    fields            (Cl Cd);    // (Cm Cd Cl);
+
+    // Optional entries (runtime modifiable)
+    resetOnRestart    false;
+    //window            0.5;
+
+    // Optional (inherited) entries
+    writePrecision    8;
+    writeToFile       true;
+    useUserTime       true;
+    region            region0;
+    enabled           true;
+    log               true;
+    timeStart         70;
+    timeEnd           1000;
+    executeControl    timeStep;
+    executeInterval   1;
+    writeControl      timeStep;
+    writeInterval     1;
+}
+
+}
+// ************************************************************************* //
+
