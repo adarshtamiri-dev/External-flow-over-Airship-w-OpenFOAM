@@ -27,7 +27,7 @@ This setup is ideal for:
 
    Parametric studies with different configurations
 
-##🚀 For Usage
+## 🚀 For Usage
 
    Clone the repo
 
@@ -37,7 +37,7 @@ This setup is ideal for:
 
    Run the simulation using simpleFoam
 
-##📁 Structure
+## 📁 Structure
 
    system/ – Simulation controls and solver settings
 
@@ -45,7 +45,7 @@ This setup is ideal for:
 
    0/ – Initial and boundary conditions
 
-##But why CfMesh?
+## But why CfMesh?
   
   Easy Configuration. (Simpler than SnappyHexMesh)
   
@@ -59,7 +59,7 @@ This setup is ideal for:
   
   Cons: The additional features (Better control and Bigger Meshes) are not Open-Sourced. Poor on layer generation in small gaps.
 
-##📝 Notes
+## 📝 Notes
 
    Designed with adaptability in mind
 
