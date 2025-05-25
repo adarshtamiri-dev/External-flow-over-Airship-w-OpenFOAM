@@ -1,19 +1,13 @@
 # External Flow over Complex Bodies with k-Epsilon Model – OpenFOAM Case File
 ## Force Coefficients ✅ 
 ## Drag Coefficients ✅
-## Easy Adjustment of AOA (FLow Components) ✅
-## (tested) Mesh Generation with CfMesh ✅ 
-## Optimized Layer Generation using SHM ✅
+## Easy Adjustment of AOA ✅
+## Mesh Generation with CfMesh ✅ 
+## 🧪 Optimized Layer Generation using SHM ✅
 
-This repository contains a tuned and ready-to-use OpenFOAM case setup for external aerodynamic flow simulations using the k-Epsilon turbulence model. Though originally tested on a specific geometry, the setup is highly adaptable and can be easily extended to similar external flow problems.
+This repository contains an OpenFOAM case setup which is good for most external aerodynamic flow interactions over surface bodies. Though originally built for a specific geometry, the setup is highly adaptable and can be easily extended to similar external flow problems.
 
-##But why CfMesh?
-  Easy Configuration. (Simpler than SnappyHexMesh)
-  Easy control over patch names (Simply combining patch.stl files)
-  Good for Curved/ Complex Geometry alignments.
-  Good for automation 
-  Good bye to heavy blockMeshes and snapping out of them.
-  Cons: The additional features (like Better control and Heavy Meshes) are not Open-Sourced.
+
   
 ##🔧 Features
 
@@ -51,6 +45,20 @@ This setup is ideal for:
 
    0/ – Initial and boundary conditions
 
+##But why CfMesh?
+  
+  Easy Configuration. (Simpler than SnappyHexMesh)
+  
+  Easy control over patch names (Simply combining patch.stl files)
+  
+  Good for Curved/ Complex Geometry alignments.
+  
+  Good for automation 
+  
+  Good bye to heavy blockMeshes and snapping out of them.
+  
+  Cons: The additional features (Better control and Bigger Meshes) are not Open-Sourced. Poor on layer generation in small gaps.
+
 ##📝 Notes
 
    Designed with adaptability in mind
@@ -61,4 +69,4 @@ This setup is ideal for:
 
    Tailor the case setup for your case and adjust the parameters accordingly.
   
-  Optimization is not gauranteed for cases that don't match the Current Repository. 
+   Optimization is not gauranteed for cases that don't match the Current Repository. 
